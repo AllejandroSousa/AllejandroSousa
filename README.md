@@ -1,6 +1,6 @@
 - 👋 Hi, I’m @AllejandroSousa
-- 👀 I’m interested, here, in programation 
-- 🌱 I’m currently learning programation and other things
+- 👀 I’m interested, here, in programming
+- 🌱 I’m currently learning programming
 
 <!---
 AllejandroSousa/AllejandroSousa is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
