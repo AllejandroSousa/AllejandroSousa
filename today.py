@@ -375,8 +375,7 @@ def formatter(query_type, difference, funct_return=False, whitespace=0):
 
 if __name__ == '__main__':
     print('Calculation times:')
-    user_data, user_time = perf_counter(user_getter, USER_NAME)
-    OWNER_ID = user_data['id']
+    OWNER_ID, user_time = perf_counter(user_getter, USER_NAME)
     formatter('account data', user_time)
     total_loc, loc_time = perf_counter(loc_query, ['OWNER', 'COLLABORATOR', 'ORGANIZATION_MEMBER'], 7)
     formatter('LOC (cached)', loc_time) if total_loc[-1] else formatter('LOC (no cache)', loc_time)
