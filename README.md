@@ -1,4 +1,3 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AllejandroSousa/AllejandroSousa/main/dark_mode.svg">
-  <img alt="Allejandro Sousa's GitHub Profile README" src="https://raw.githubusercontent.com/AllejandroSousa/AllejandroSousa/main/light_mode.svg">
-</picture>
+<p align="center">
+  <img src="./spiderman.svg" width="100%" alt="Pixel-art Spider-Man perched on a rooftop leaps into a rainy Times Square-like avenue and web-swings past billboards of Ruby, Python, JavaScript, C++, Hugging Face and AppSec">
+</p>
