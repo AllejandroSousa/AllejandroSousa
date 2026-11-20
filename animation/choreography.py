@@ -45,6 +45,7 @@ SWING_DIP = 10.0
 SWING_SWAY = 3.0
 ANCHOR_HEIGHT = 92.0
 ANCHOR_AHEAD = 22.0
+LAND_START_SLOPE = 0.7  # matches the speed the old landing curve left the last swing with
 
 
 @dataclass(frozen=True)
@@ -128,12 +129,25 @@ def gap(index: int, u: float) -> HeroState:
     return HeroState(poses.SPREAD, Placement(lifted, pitch=10))
 
 
+def arrive(u: float, start_slope: float = LAND_START_SLOPE) -> float:
+    """Cubic Hermite from 0 to 1 leaving at `start_slope` and arriving at rest.
+
+    >>> arrive(0.0), arrive(1.0)
+    (0.0, 1.0)
+    """
+    return start_slope * (u ** 3 - 2 * u ** 2 + u) + 3 * u ** 2 - 2 * u ** 3
+
+
 def land(u: float) -> HeroState:
-    """Last release flings the hero up onto the rooftop, back into the perch."""
+    """Last release flings the hero up onto the rooftop, back into the perch.
+
+    The path eases out to zero speed: arriving at full speed and freezing on the
+    next frame read as a hard cut right before the loop restarts.
+    """
     start, end = SWING_POINTS[-1], landing_home()
     control = ((start[0] + end[0]) / 2, end[1] + 6, (start[2] + end[2]) / 2)
     pose = poses.blend(poses.SPREAD, poses.CROUCH, smoothstep((u - 0.55) / 0.4))
-    placement = Placement(bezier3(start, control, end, smoothstep(u) * 0.3 + u * 0.7),
+    placement = Placement(bezier3(start, control, end, arrive(u)),
                           yaw=lerp(0, PERCH_YAW, smoothstep((u - 0.4) / 0.6)),
                           pitch=lerp(10, 0, smoothstep(u)))
     return HeroState(pose, placement)

@@ -109,6 +109,16 @@ class ChoreographyTest(unittest.TestCase):
             x, y = screen
             self.assertTrue(0 <= x <= FRAME_WIDTH and 0 <= y <= FRAME_HEIGHT + 10, f"({x:.0f},{y:.0f}) at t={t:.2f}")
 
+    def test_hero_slows_down_before_settling_on_the_perch(self):
+        # Regression: the landing used to end at ~2 units/frame and freeze on the
+        # next frame, a hard stop right before the loop restarts.
+        landing = [s.placement.position for t, s in zip(self.times, self.states)
+                   if choreography.TRAVEL[1] - 0.5 <= t < choreography.TRAVEL[1]]
+        landing.append(choreography.landing_home())
+        steps = [sum((a - b) ** 2 for a, b in zip(p, q)) ** 0.5 for p, q in zip(landing, landing[1:])]
+        self.assertEqual(steps, sorted(steps, reverse=True), f"not decelerating: {steps}")
+        self.assertLess(steps[-1], 0.3, f"arrives too fast: {steps}")
+
     def test_scroll_completes_whole_patterns(self):
         total = choreography.scroll_at(choreography.LOOP_SECONDS)
         self.assertEqual(total % (CODE_PATTERN_ROWS * CODE_ROW), 0)
