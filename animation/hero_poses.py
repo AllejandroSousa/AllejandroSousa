@@ -19,12 +19,12 @@ JOINTS = (
 )  # fmt: skip
 # "gaze" is not a body part: the mask's eyes face from "head" towards it.
 
-# Statue pose: deep squat, left arm flung out to the side, right hand planted
-# on the ledge, right knee wide, left knee low and forward, head turned left.
+# Deep squat, both hands planted on the ledge (the left one just inside the
+# left knee), right knee wide, left knee low and forward, head turned left.
 CROUCH: Skeleton = {
     "head": (-0.03, 0.97, 0.30), "neck": (0.0, 0.85, 0.22), "chest": (0.03, 0.63, 0.12),
     "pelvis": (0.03, 0.34, -0.04),
-    "l_sho": (-0.18, 0.79, 0.14), "l_elb": (-0.44, 0.84, 0.20), "l_hand": (-0.62, 0.96, 0.44),
+    "l_sho": (-0.18, 0.79, 0.14), "l_elb": (-0.22, 0.46, 0.34), "l_hand": (-0.10, 0.06, 0.42),
     "r_sho": (0.22, 0.76, 0.14), "r_elb": (0.34, 0.46, 0.26), "r_hand": (0.30, 0.06, 0.32),
     "l_hip": (-0.09, 0.32, -0.04), "l_knee": (-0.24, 0.22, 0.34), "l_foot": (-0.32, 0.05, -0.04),
     "r_hip": (0.15, 0.32, -0.04), "r_knee": (0.50, 0.38, 0.12), "r_foot": (0.40, 0.05, 0.02),
